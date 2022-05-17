@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-sysbench
+spec:
+  containers:
+    - name: sysbench
+      image: gcr.io/speckle-manual-test/sysbench:latest
+      command: [ "sleep" ]
+      args: [ "infinity" ]
+      volumeMounts:
+        - mountPath: "/data"
+          name: io-test
+  volumes:
+    - name: io-test
+      persistentVolumeClaim:
+        claimName: pvc-io
